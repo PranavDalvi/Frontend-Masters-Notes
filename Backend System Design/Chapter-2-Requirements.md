@@ -1,3 +1,4 @@
+# Chapter 2 Requirements
 ### Identify Requirements
 - Core elements of system design
 	- Translating business requirements.
@@ -107,16 +108,16 @@
 	- **Partition Tolerance:** The system continues to operate even if messages are delayed or lost.
 - But in Distributed Systems we can only get 2 of the 3 CAP only:
 
-| Pick Two | Trade Off                                              | Reality  |
-| -------- | ------------------------------------------------------ | -------- |
-| C + A    | Only works without network issue                       | Not sure |
-| C + P    | Always show the latest data but unreliable performance | Yes      |
-| A + P    | Always responds but might show outdated data           | Yes      |
+| Pick Two  | Trade Off                                              |
+| --------- | ------------------------------------------------------ |
+| ~~C + A~~ | ~~Only works without network issue~~                   |
+| C + P     | Always show the latest data but unreliable performance |
+| A + P     | Always responds but might show outdated data           |
 ***
 ### System Quality
-- Reliablity
+- Reliability
 	- Availability
-	- Resiliency (Partition Toloerance)
+	- Resiliency (Partition Tolerance)
 	- Consistency
 - Observability: The ability to know what is happening in your system (metrics).
 - Security: The ability to safeguard your system and its data.
@@ -138,12 +139,63 @@
 ***
 ### Non-Functional Requirements (banking app)
 - **Questions:**
-	- How many MAU's?
+	- How many MAUs (Monthly Active Users)?
 	- How many transactions per user?
 	- How frequent are the transactions?
 	- How long do we store transaction data?
 	- What is the minimum latency for a transaction?
 	- What is our availability target?
 	- How consistent are the traffic patterns?
+	- How frequently do we back up data?
+	- How long should it take to restore a backup?
+	- What is the geolocation of  most our users?
+	- Is there data/process compliance to be aware of?
+	- What are the audit requirements
 - **Non-Functional**
-	- 
+	- The system should have 4 nines of availability.
+	- Transactions should be backed up daily.
+	- Transaction data must be encrypted in transit and at rest.
+	- Transactions cannot be lost.
+	- Every transaction and user action must be audited.
+### Questions (IMP Only)
+1. **When designing a banking application, what are two key non-functional requirements related to data protection?**
+	1. Transaction data must be encrypted both in transit and at rest. Additionally, there should be data process compliance requirements to protect PII (Personally Identifiable Information), which may include GDPR compliance depending on the region.
+2. **What is the tradeoff when implementing end-to-end encryption for transaction data in a microservices architecture?**
+	1. Normally, HTTPS traffic is decrypted at the edge to make processing faster and avoid computational overhead. However, if data must be encrypted in transit throughout the entire system until it reaches the database, every service must decrypt the data to use it, which is computationally expensive and impacts performance.
+3. **Why are audit requirements considered a non-functional requirement in a banking application?**
+	1. Audit requirements don't directly affect user-facing functionality, but they determine how the system tracks and logs who performed transactions and when they occurred. This is critical for recovering from issues like lost transactions or investigating fraud, but the user doesn't directly interact with these audit logs.
+***
+### Non-Functional Requirements (URL Shortner)
+- **Questions:**
+	- How many MAUs (Monthly Active Users)?
+	- What is the average RPS (Response Per Second).
+	- What is maximum latency allowed?
+	- What is the maximum length of a URL?
+	- Do URLs expire?
+- **Non-Functional**
+	- Redirects should happen in no more than 500 ms
+	- System should support 1 million RPS.
+	- Long URLs can be at most 3kb.
+	- Short URLs can be at most 1kb.
+### Questions (IMP Only)
+1. **Why is setting a maximum URL size important when designing a URL shortener system?**
+	- Setting a maximum URL size is important because it affects database choices and storage considerations. Without a limit, users could submit garbage data that could take down the system. Different databases have different limits - object databases have fewer restrictions while relational databases can have stricter limits.
+2. **In a URL shortener system, why might hashing algorithm performance be a concern?**
+	- Hashing algorithm performance matters because the URL shortener needs to perform look-ups quickly - it takes a short link, looks it up using a hash, and redirects to the corresponding long URL. The speed of both the hashing algorithm and the lookup operation impacts the overall response time of the redirect.
+3. **Is URL expiration typically considered a functional or non-functional requirement in a URL shortener system, and why?**
+	- URL expiration can be considered both functional and non-functional. It has functional aspects related to feature behaviour, but it also affects non-functional considerations like storage and system maintenance - if URLs don't expire, there needs to be a cleanup process, otherwise they will live on forever and impact storage capacity.
+***
+### Extra Questions and Answers
+1. Define Functional Requirements and Non - Functional Requirements
+	- **Functional requirements** describe **what** the system should do. They define the specific features, user interactions, and core functions that the system must provide to meet business needs.
+	-  **Focus:** Features and behaviour (e.g., "User should be able to order a pizza").
+	- **Examples from the notes:**
+	    - Users being able to login with a username and password.
+	    - Users being able to transfer, receive, and schedule money transfers.
+	    - Converting long URLs into a shortened version.
+	- **Non-functional** **requirements** describe **how** the system should perform. They define the quality attributes, constraints, and performance targets that the system must operate within.
+		- **Focus:** Quality attributes like speed, consistency, security, and scalability.
+		- **Examples from the notes:**
+			- The system should have "four nines" (99.99%) of availability.
+			- Transaction data must be encrypted both in transit and at rest.
+			- URL redirects should happen in no more than 500 ms.

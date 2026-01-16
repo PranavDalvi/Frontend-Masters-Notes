@@ -1,4 +1,4 @@
-# Chapter-1-Recognizing **Systems**
+# Chapter 1 Recognizing **Systems**
 - **Everything is a system.**
 	- System has a trade-off
 - **What is a system**
