@@ -7,7 +7,7 @@
 	- Has Boundaries (what's inside, what's outside)
 		- System are endless so focusing on important details is important and defining boundaries.
 ***
-- **Exercise:** Design a system for pizza shop![](pizza-shop.webp)]
+- **Exercise:** Design a system for pizza shop![](./attachments/pizza-shop.webp)]
 - The solution for this exercise was different for different people as I in this diagram showed the processes as A CUSTOMER some showed the process as A OWNER or as A CHEF like taking out a dough, rounding it, adding toppings, placing it in oven, cutting it and boxing it, etc,  but in the end customer got their pizza and that's important.
 ***
 - **What is distributed system**
@@ -17,7 +17,7 @@
 - **What are the two main reasons for creating distributed system?**
 	- Distributed systems are created to handle failure and to be able to scale. It's difficult to scale just one machine (vertical scaling), and a single machine creates a single point of failure. By distributing across multiple machines, systems can better handle load and avoid catastrophic failures.
 ***
-- How Does Internet Works ![](how-does-internet-works.webp)
+- How Does Internet Works ![](./attachments/how-does-internet-works.webp)
 ***
 - **Common System Components**
 
@@ -51,7 +51,7 @@
 - **What is the primary difference between a cache and a database?**
 	- While both store data, a cache stores temporary data and is designed to be close to where the data is needed (either close to the user or close to the data source) to make things faster. A database stores persistent data. Caches typically use strategies like least recently used (LRU) for managing temporary data, whereas databases are designed for long-term storage and retrieval.
 ***
-- Visualizing Flow of Data: ![](VizFlow.webp)![](mobile-data-flow-system.webp)
+- Visualizing Flow of Data: ![](./attachments/VizFlow.webp)![](./attachments/mobile-data-flow-system.webp)
 - **Why Mobile arch is different?**
 	- In a mobile application, the UI is already baked into the client (installed from the app store), so a web server isn't needed to serve the UI. The mobile app typically makes API requests directly to get data rather than requesting UI components. This means the system's role shifts to primarily keeping caches up to date with data rather than serving both UI and data.
 - **What is a pass-through cache and how does it handle cache misses?**
